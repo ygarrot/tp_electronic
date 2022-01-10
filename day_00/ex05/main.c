@@ -6,7 +6,7 @@ int debounce (unsigned last_state) {
 
 	if( last_state != new_state )
 	{
-		_delay_ms(25) ;
+		_delay_ms(25);
 		if( PIND & (1 << PORTD3) == new_state )
 			return new_state;
 	}
