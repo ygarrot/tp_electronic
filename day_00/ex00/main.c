@@ -7,9 +7,9 @@ int main()
 	DDRB |= (1 << DDB1);
 	while (1)
 	{
-		PORTB |= (1 << PORTB1);
+		PORTB |= (1 << PORTB3);
 		_delay_ms(1000);
-		PORTB &= ~(1 << PORTB1);
+		PORTB &= ~(1 << PORTB3);
 		_delay_ms(1000);
 	}
 	return 0;
