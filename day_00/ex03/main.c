@@ -3,7 +3,8 @@
 /* our wait. According to this page - http://playground.arduino.cc/Main/AVR, a NOP operation takes 1 clock cycle - 1 clock cycle = 1/frequency. At 16MHz a NOP will take 62.5nS to execute */
 void delay(unsigned long delay) {
   volatile unsigned long i = 0;
-  for (i = 0; i < delay; i++) {
+  multiply
+  for (i = 0; i < delay * 160; i++) {
       __asm__ __volatile__ ("nop");
   }
 }
