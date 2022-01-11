@@ -1,39 +1,46 @@
-#define F_CPU 16000000UL
 #include <avr/io.h>
-#include <util/delay.h>
-#include <avr/interrupt.h>
+#define F_CPU 16000000UL
 
-volatile uint8_t counter = 0; // this counts the number of timer overflows
 
-/* • Vous devez configurer les registres du Timer1 pour commander la LED. */
-ISR (TIMER1_COMPA_vect) {
-	counter++;
-	PORTB ^= 1 << PORTB3;
-	if (counter >= 1000){
-		PORTB ^= 1 << PORTB3;
-		counter = 0;
-	}
-}
+/* void main() { */
+/* 	/1* port b 3 en output (led) *1/ */
+/* 	DDRB |= (1 << DDB3); */
 
-void init_timer() {
-	/* number of tick in second */ 
-	OCR1A = 0xF9; 
-	/* Timer/Counter Control Register */
-	/* • Bit 3 – WGM[x]2: Waveform Generation Mode */
+/* 	TCCR1B = (1 << CS12) | (1 << CS10); */
 
-	/* TCCR1A = (1 << WGM12); */
-	/* Bits 2:0 – CS02:0: Clock Select */
-	/* CS12 */
-	TCCR1B = (1 << CS12);
-	/* TIMSK = Timer Interrupt Mask Register */
-	TIMSK1 = (1 << OCIE1A);
-	/* sei(); */
-}
+/* 	OCR1A = 7812; //16 000 000 /(1024*2) */
+/* 	/1* TCNT1 = 1; *1/ */ 
+/* 	while (1) { */
+/* 		/1* tant que le flag d'overflow n'est pas actif on ne fait rien *1/ */
+/* 		while((TIFR1 & (1 << OCF1A)) == 0); */
+/* 		/1* on inverse l'etat de la led *1/ */
+/* 		PORTB ^= 1 << PORTB3; */
+/* 		/1* TCNT1 = 0; *1/ */ 
+/* 		/1* reset du flag d'overflow *1/ */
+/* 		TIFR1 |= (1<<OCF1A); */
+/* 	} */
+/* } */
 
-int main() {
-	DDRB |= (1 << DDB3);
-	init_timer();
-	while (1){
-	}
-	return 0;
+void main(){ 
+  DDRB |= (1 << DDB1);
+  /* DDRB |= (1 << DDB3); */
+
+  // 1 << 2 | 1 << 0 = 101 -> 1024 (Clock/1024)
+  /* Register: TCCR1B */
+  /* Name: Timer/Counter 1 Control Register B */
+  /* Description: Set the timer mode. */
+
+  TCCR1B = (1<<CS12) | (1<<CS10);
+  TCCR1B |= (1<<WGM12); //RAZ timer quand comparaison
+
+  /* Register: TCCR1A */
+  /* Name: Timer/Counter 1 Control Register A */
+  /* Description: Set the timer mode. */
+  TCCR1A = (1<<COM1A0); //bascule sortie a chaque comparaison
+  /* TCCR1A |= (1<<COM1B1); //bascule sortie a chaque comparaison */
+  /* TCCR1A &= ~(1<<COM1B1); //bascule sortie a chaque comparaison */
+  /* • Bit 5:4 – COM1B1:0: Compare Output Mode for Channel B */
+
+  OCR1A = 7812;//16 000 000 /(1024*2)
+  while(1);
 }
