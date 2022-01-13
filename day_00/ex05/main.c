@@ -1,15 +1,12 @@
 #include <util/delay.h>
 #include <avr/io.h>
 
-int debounce () {
-	unsigned new_state = PIND & (1 << PORTD3);
-
-	while (PIND & (1 << PORTD3) == new_state){
+void debounce (state) {
+	while (PIND & (1 << PORTD3)) {
 	}
-	for (long i = 0; i < 1600000; i++);
 	PORTB ^= 1 << PORTB3;
-
-	return last_state ;
+	_delay_ms(1000);
+	/* for (long i = 0; i < 160000000; i++); */
 }
 
 int main()
@@ -17,7 +14,7 @@ int main()
 	DDRB |= (1 << DDB3);
 	DDRC &= ~(1 << PORTD3);
 	while (1){
-		if( PIND & (1 << PORTD3))
+		if(PIND & (1 << PORTD3))
 			debounce();
 	}
 	return 0;
