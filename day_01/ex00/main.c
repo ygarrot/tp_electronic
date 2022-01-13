@@ -22,7 +22,7 @@ void main(){
   /* Register: TCCR1A */
   /* Name: Timer/Counter 1 Control Register A */
   /* Description: Set the timer mode. */
-  TCCR1A = (1 << COM1A0); //bascule sortie a chaque comparaison
+  TCCR1A = (1 << COM1A0);
   /* • Bit 5:4 – COM1B1:0: Compare Output Mode for Channel B */
 
   OCR1A = 7812; //16 000 000 / (1024 * 2)

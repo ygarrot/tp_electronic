@@ -1,6 +1,12 @@
 #include <avr/io.h>
 #include <avr/delay.h>
 
+void INT1_vect (void) __attribute__ ((signal,__INTR_ATTRS));
+
+void INT1_vect (void) {
+	PORTB ^= (1 << PORTB3);
+}
+
 int main() {
 	/* on indique que le bit 1 du port b est en output */
 	DDRB |= (1 << DDB3);
@@ -17,7 +23,6 @@ int main() {
 		if (EIFR & (1 << INTF1)) {
 			PORTB ^= (1 << PORTB3);
 			EIFR = (1 << INTF1);
-			_delay_ms(250);
 		}
 	}
 	return 1;
