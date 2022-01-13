@@ -33,8 +33,7 @@ void duty_cycle() {
 	OCR1A = 0;
 }
 
-void init() {
-	// clk / 256 bits
+void init_timer0() {
 	TCCR0B = PRESCALE_256;
 	// turn on CTC mode
 	TCCR0A = (1 << WGM01);
@@ -51,7 +50,7 @@ int main() {
 	DDRB |= (1 << DDB1);
 
 	duty_cycle();
-	init();
+	init_timer0();
 
 	while (1);
 }
