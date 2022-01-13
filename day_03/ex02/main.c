@@ -6,12 +6,7 @@
 
 void uart_tx(const char *data);
 void uart_printstr(const char* str);
-
-void TIMER1_COMPA_vect (void) __attribute__ ((signal,__INTR_ATTRS));
-
-void TIMER1_COMPA_vect (void) {
-	uart_printstr("Hello world!\n\r");
-}
+char uart_rx(void);
 
 void uart_printstr(const char* str)
 {
@@ -21,18 +16,6 @@ void uart_printstr(const char* str)
 		++str;
 	}
 }
-
-void timer_init(){ 
-	TCCR1B = (1 << CS12) | (1 << CS10);
-	TCCR1B |= (1 << WGM12);
-
-	TCCR1A = (1 << COM1A0);
-	TIMSK1 |= (1 << OCIE1A); // Enable CTC interrupt
-
-	OCR1A = 15624 * 2; //16 000 000 / (1024) 1 hz
-	SREG = 1 << 7;
-}
-
 void uart_init(unsigned int ubrr) {
 	/*Set baud rate */
 	UBRR0H = (unsigned char)(ubrr >> 8);
@@ -49,9 +32,19 @@ void uart_tx(const char* data) {
 	UDR0 = data;	
 }
 
+char uart_rx(void)
+{
+	/* Wait for data to be received */
+	while ( !(UCSR0A & (1<<RXC0)) )
+		;
+	/* Get and return received data from buffer */
+	return UDR0;
+}
+
 int main() {
-	timer_init();
 	uart_init(8);
 	while(1){
+		uart_printstr("\n\rcharacter received: ");
+		uart_tx(uart_rx());
 	};
 }
