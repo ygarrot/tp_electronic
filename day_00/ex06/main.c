@@ -1,29 +1,20 @@
+#include "../tools.h"
 #include <util/delay.h>
-#include <avr/io.h>
 
-void debounce () {
-	while (PIND & (1 << PORTD3)) {
-	}
-	_delay_ms(1000);
-}
 int main()
 {
-	int power = 0;
+	int8_t power = 0;
 	DDRB |= (1 << DDB0);
 	DDRB |= (1 << DDB1);
 	DDRB |= (1 << DDB2);
 	DDRB |= (1 << DDB3);
-	DDRC &= ~(1 << PORTD3);
+	D3_INPUT;
 
 	while (1)
 	{
-		if (PIND & (1 << PORTD3)){
-			debounce();
-			power++;
-		}
+		DEBOUNCE(power++);
 		PORTB = power;
-		if (power >= 16)
-			power = 0;
+		power = power % 17;
 	}
 	return 0;
 }

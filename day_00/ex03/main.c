@@ -1,14 +1,11 @@
-#include <avr/io.h>
-
-#define delay(n) for (long i = 0; i < n; i++);
+#include "../tools.h"
 
 int main()
 {
-	DDRB |= (1 << PB3);
+	B3_OUTPUT;
 	for (;;)
 	{
-		delay(1600000);
-		/* for (long i = 0; i < 1600000; i++); */
-		PORTB ^= (1 << PB3);
+		delay(HZ1);
+		TOGGLE_PORT_B3
 	}
 }
