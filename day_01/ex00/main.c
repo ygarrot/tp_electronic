@@ -18,7 +18,7 @@ int main(){
 	/* In CTC mode the counter is cleared to zero when the counter value (TCNT0) matches the OCR0A */
 	/* |  4   |   0   |   1   |   0   |   0   |        CTC        | CCR1A  | Immediate |    MAX    | */
 	TCCR1B |= (1 << WGM12);
-	/* Clear OC1A/OC1B on Compare Match (Set output to low level). */ 
+	/* |      0  |      1  | Toggle OC1A/OC1B on Compare Match.                          | */
 	TCCR1A = (1 << COM1A0);
 
 	/*            // F_CPU / (PRESCALE * 2) */
