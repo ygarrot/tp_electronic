@@ -137,9 +137,32 @@ void timer_init(){
 	OCR1A = 15624; //16 000 000 / (1024) 1 hz
 }
 
+/* EX01 */
+
+void uart_printstr(const char* str);
+
+void uart_printstr(const char* str)
+{
+	while (*str)
+	{
+		uart_tx(*str);
+		++str;
+	}
+}
+
 /* EX02 */
 
 void uart_printstr(const char* str);
+char uart_rx(void);
+
+char uart_rx(void)
+{
+	/* Wait for data to be received */
+	while (!(UCSR0A & (1 << RXC0)));
+	/* Get and return received data from buffer */
+	return UDR0;
+}
+
 
 /* ########################## END DAY 3 ########################## */
 
