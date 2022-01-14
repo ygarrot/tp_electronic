@@ -1,20 +1,25 @@
 #include <avr/io.h>
 
+#define CLEAR_PORT_B3 PORTB &= ~(1 << PORTB3);
+#define SET_PORT_B3 PORTB |= (1 << PORTB3);
+
+#define PIND3_IS_UP PIND & (1 << PIND3)
+
 int main()
 {
-	/* Define pull-ups and set outputs high */
-	/* Define directions for port pins */
-	/* on indique que le bit 3 du port b est en output */
+	/* pint 3 port b en output */
 	DDRB |= (1 << DDB3);
-	/* on indique que le bit 3 du port d est en input */
+	/* pin 3 port d en input */
 	DDRC &= ~(1 << PORTD3);
 	while (1)
 	{
-		/* si le bit 3 du port d est a 1 ca veut dire que le bouton est appuye */
-		if (PIND & (1 << PORTD3))
-			PORTB &= ~(1 << PORTB3);
+		/* si le pin 3 du port d est up == bouton enclenche */
+		if (PIND3_IS_UP)
+			/* pin 3 port b a 0 */
+			CLEAR_PORT_B3
 		else
-			PORTB |= (1 << PORTB3);
+			/* pin 3 port b a 1 */
+			SET_PORT_B3
 	}
 	return 0;
 }
