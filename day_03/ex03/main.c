@@ -23,8 +23,6 @@ ISR(USART_RX_vect, ISR_BLOCK)
 }
 
 int main() {
-	DDRB |= (1 << DDB3);
-
 	uart_init(8);
 	/* Enable receiver interupt */
 	UCSR0B |= (1 << RXCIE0);
