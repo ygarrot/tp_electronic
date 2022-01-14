@@ -4,21 +4,8 @@
 void debounce () {
 	while (PIND & (1 << PORTD3)) {
 	}
-	/* PORTB ^= 1 << PORTB3; */
 	_delay_ms(1000);
-	/* for (long i = 0; i < 160000000; i++); */
 }
-
-/* 1: 0 0 0 1 */
-/* 2: 0 0 1 0 */
-/* 3: 0 0 1 1 */
-/* 4: 0 1 0 0 */
-/* 5: 0 1 0 1 */
-/* 6: 0 1 1 0 */
-/* 7: 0 1 1 1 */
-
-/* 8: 1 0 0 1 */
-
 int main()
 {
 	int power = 0;
@@ -34,7 +21,6 @@ int main()
 			debounce();
 			power++;
 		}
-
 		PORTB = power;
 		if (power >= 16)
 			power = 0;
