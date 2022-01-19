@@ -6,6 +6,8 @@
 /* https://github.com/amirbawab/AVR-cheat-sheet */
 /* ########################## DAY 0 ########################## */
 
+#define PORT_OUTPUT(PORT, n) (1 << DD ## PORT ## n )
+
 #define B_OUTPUT_(n) (1 << DDB ## n )
 #define B_OUTPUT(n) DDRB |= B_OUTPUT_(n)
 #define B_OUTPUT_FULL DDRB |= B_OUTPUT_(1)| B_OUTPUT_(2) |B_OUTPUT_(3) | B_OUTPUT_(4)
@@ -17,8 +19,8 @@
 #define SET_PORT_B3 PORTB |= (1 << PORTB3);
 
 /* pin 3 port d en input */
-#define D3_INPUT DDRC &= ~(1 << PORTD3)
-#define PIND3_IS_UP (!(PIND & (1 << PIND3)))
+#define D3_INPUT DDRC &= ~(1 << PORTD2)
+#define PIND3_IS_UP (!(PIND & (1 << PIND2)))
 
 #define HZ1 1600000
 #define delay(n) for (long i = 0; i < n; i++);
@@ -167,5 +169,16 @@ char uart_rx(void)
 
 
 /* ########################## END DAY 3 ########################## */
+
+/* ########################## DAY 5 ########################## */
+
+#define RED (1 << PORTD6)
+#define GREEN (1 << PORTD5)
+#define BLUE (1 << PORTD3)
+#define YELLOW ~(RED | GREEN)
+#define MAGENTA ~(RED | BLUE)
+#define CYAN ~(GREEN | BLUE)
+
+/* ########################## END DAY 5 ########################## */
 
 #endif
