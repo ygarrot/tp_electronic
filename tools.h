@@ -6,8 +6,9 @@
 /* https://github.com/amirbawab/AVR-cheat-sheet */
 /* ########################## DAY 0 ########################## */
 
-#define B_OUTPUT(n) DDRB |= (1 << DDB ## n )
-
+#define B_OUTPUT_(n) (1 << DDB ## n )
+#define B_OUTPUT(n) DDRB |= B_OUTPUT_(n)
+#define B_OUTPUT_FULL DDRB |= B_OUTPUT_(1)| B_OUTPUT_(2) |B_OUTPUT_(3) | B_OUTPUT_(4)
 /* pint 3 port b en output */
 #define B3_OUTPUT B_OUTPUT(3)
 
@@ -17,15 +18,15 @@
 
 /* pin 3 port d en input */
 #define D3_INPUT DDRC &= ~(1 << PORTD3)
-#define PIND3_IS_UP (PIND & (1 << PIND3))
+#define PIND3_IS_UP (!(PIND & (1 << PIND3)))
 
 #define HZ1 1600000
 #define delay(n) for (long i = 0; i < n; i++);
-#define DEBOUNCE(f) if PIND3_IS_UP { \
-	while PIND3_IS_UP;\
-	delay(HZ1 * 10);\
+#define DEBOUNCE(f) if (PIND3_IS_UP) { \
+	while(PIND3_IS_UP); \
 	f;\
-}\
+	delay(500);\
+}
 
 /* ########################## END DAY 0 ########################## */
 
@@ -47,6 +48,7 @@
 /* and CLI instructions, as described in the instruction set reference. */
 
 #define GLOBAL_INTERRUPT SREG = (1 << 7);
+#define DISABLE_GLOBAL_INTERRUPT SREG &= ~(1 << 7);
 
 /* EX02 */
 

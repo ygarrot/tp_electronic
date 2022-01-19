@@ -8,11 +8,11 @@ int main()
 	DDRB |= (1 << DDB1);
 	DDRB |= (1 << DDB2);
 	DDRB |= (1 << DDB3);
-	D3_INPUT;
 
 	while (1)
 	{
-		DEBOUNCE(power++);
+		power++;
+		_delay_ms(500000);
 		PORTB = power;
 		power = power % 17;
 	}
