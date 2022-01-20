@@ -1,13 +1,21 @@
 #include "tools.h"
+#include "time.h"
+#include <avr/eeprom.h>
+#include <util/delay.h>
 
-MY_ISR(TIMER1_COMPA_vect) {
-	uart_printstr("Hello world!\n\r");
-}
-
+#define col (const int8_t []) {~RED, ~GREEN, ~BLUE, YELLOW, MAGENTA, CYAN, WHITE}
 int main() {
-	GLOBAL_INTERRUPT;
-	timer_init();
-	uart_init(8);
+	DDRD = PORT_OUTPUT(D, 6) | PORT_OUTPUT(D, 5) | PORT_OUTPUT(D, 3);
 
-	while(1);
+	int8_t i = 0;
+	PORTD = 0xff;
+	while(1) {
+		if (!(PIND & (1 << PIND2))) {
+			while (!(PIND & (1 << PIND2)));
+			i = (i + 1) % sizeof(col);
+			PORTD = col[i];
+			_delay_ms(1000);
+		}
+	}
 }
+

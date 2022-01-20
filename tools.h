@@ -172,12 +172,16 @@ char uart_rx(void)
 
 /* ########################## DAY 5 ########################## */
 
+#define BLACK 0xff
+#define WHITE 0x00
 #define RED (1 << PORTD6)
 #define GREEN (1 << PORTD5)
 #define BLUE (1 << PORTD3)
 #define YELLOW ~(RED | GREEN)
 #define MAGENTA ~(RED | BLUE)
 #define CYAN ~(GREEN | BLUE)
+
+
 
 /* ########################## END DAY 5 ########################## */
 
