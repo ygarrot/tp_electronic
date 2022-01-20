@@ -18,9 +18,9 @@
 #define CLEAR_PORT_B3 PORTB &= ~(1 << PORTB3);
 #define SET_PORT_B3 PORTB |= (1 << PORTB3);
 
-/* pin 3 port d en input */
-#define D3_INPUT DDRC &= ~(1 << PORTD2)
-#define PIND3_IS_UP (!(PIND & (1 << PIND2)))
+/* pin 2 port d en input */
+#define D2_INPUT DDRC &= ~(1 << PORTD2)
+#define PIND2_IS_UP (!(PIND & (1 << PIND2)))
 
 #define HZ1 1600000
 #define delay(n) for (long i = 0; i < n; i++);
