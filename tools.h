@@ -157,7 +157,6 @@ void uart_printstr(const char* str)
 
 /* EX02 */
 
-void uart_printstr(const char* str);
 char uart_rx(void);
 
 char uart_rx(void)
@@ -182,7 +181,7 @@ char uart_rx(void)
 #define MAGENTA ~(RED | BLUE)
 #define CYAN ~(GREEN | BLUE)
 
-
+#define col (const int8_t []) {~RED, ~GREEN, ~BLUE, YELLOW, MAGENTA, CYAN, WHITE}
 
 /* ########################## END DAY 5 ########################## */
 
