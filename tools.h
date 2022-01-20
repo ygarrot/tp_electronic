@@ -20,6 +20,7 @@
 
 /* pin 2 port d en input */
 #define D2_INPUT DDRC &= ~(1 << PORTD2)
+#define D3_INPUT DDRC &= ~(1 << PORTD2)
 #define PIND2_IS_UP (!(PIND & (1 << PIND2)))
 
 #define HZ1 1600000
