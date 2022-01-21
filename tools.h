@@ -183,6 +183,23 @@ char uart_rx(void)
 
 #define col (const int8_t []) {~RED, ~GREEN, ~BLUE, YELLOW, MAGENTA, CYAN, WHITE}
 
+/* ########################## ex01 ########################## */
+
+typedef struct s_rgb {
+	uint8_t r;
+	uint8_t g;
+	uint8_t b;
+} t_rgb;
+
+
+#define inverse_ratio(n) (int8_t)(100.0 - (n / 255.0 * 100.0))
+#define calc_ratio(n) freq * inverse_ratio(n) / 100;
+
+#define set_red(n) OCR0A = calc_ratio(n);
+#define set_green(n) OCR0B = calc_ratio(n);
+#define set_blue(n) OCR1A = calc_ratio(n);
+
+
 /* ########################## END DAY 5 ########################## */
 
 #endif

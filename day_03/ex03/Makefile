@@ -2,7 +2,7 @@ MCU=atmega328p
 CC=avr-gcc
 OBJCOPY=avr-objcopy
 F_CPU=16000UL
-CFLAGS= -Wall -Os -DF_CPU=${F_CPU} -mmcu=${MCU}
+CFLAGS= -Wall -DF_CPU=${F_CPU} -mmcu=${MCU}
 TARGET=main
 
 
