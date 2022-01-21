@@ -32,6 +32,7 @@ void println(char *str) {
 	uart_printstr(str);
 	uart_printstr("\r\n");
 }
+
 void display(char *color) {
 	uart_printstr(COLOR_TXT);
 	uart_printstr(color);
