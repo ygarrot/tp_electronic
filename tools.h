@@ -10,9 +10,12 @@
 
 #define B_OUTPUT_(n) (1 << DDB ## n )
 #define B_OUTPUT(n) DDRB |= B_OUTPUT_(n)
-#define B_OUTPUT_FULL DDRB |= B_OUTPUT_(0)| B_OUTPUT_(1) |B_OUTPUT_(2) | B_OUTPUT_(3)
+#define B_OUTPUT_FULL DDRB |= B_OUTPUT_(0)| B_OUTPUT_(1) |B_OUTPUT_(2) | B_OUTPUT_(4)
 /* pint 3 port b en output */
 #define B3_OUTPUT B_OUTPUT(3)
+
+
+#define D_FULL_OUPUT DDRD |= PORT_OUTPUT(D, 6) | PORT_OUTPUT(D, 5) | PORT_OUTPUT(D, 3);
 
 #define TOGGLE_PORT_B3 PORTB ^= (1 << PORTB3)
 #define CLEAR_PORT_B3 PORTB &= ~(1 << PORTB3);
@@ -185,6 +188,7 @@ char uart_rx(void)
 
 /* ########################## ex01 ########################## */
 
+#define NL "\r\n"
 typedef struct s_rgb {
 	uint8_t r;
 	uint8_t g;
