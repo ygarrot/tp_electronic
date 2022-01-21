@@ -192,8 +192,9 @@ typedef struct s_rgb {
 } t_rgb;
 
 
+#define FREQ (int8_t)50
 #define inverse_ratio(n) (int8_t)(100.0 - (n / 255.0 * 100.0))
-#define calc_ratio(n) freq * inverse_ratio(n) / 100;
+#define calc_ratio(n) (int8_t)FREQ * inverse_ratio(n) / 100;
 
 #define set_red(n) OCR0A = calc_ratio(n);
 #define set_green(n) OCR0B = calc_ratio(n);
