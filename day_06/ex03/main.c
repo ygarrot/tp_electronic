@@ -13,6 +13,8 @@
 
 int8_t i = 0;
 
+char buffer[20];
+
 
 ISR(TIMER0_COMPA_vect) {
 	PORTD = ~RED;
@@ -25,9 +27,6 @@ ISR(TIMER0_COMPB_vect) {
 ISR(TIMER1_COMPA_vect) {
 	PORTD = ~BLUE;
 }
-
-
-char buffer[20];
 
 void println(char *str) {
 	uart_printstr(str);
@@ -55,15 +54,34 @@ void blue() {
 	set_blue(ADC);
 }
 
-ISR(ADC_vect) {
+void display_val_lvl() {
+	int8_t ratio = calc_percent(ADC, 1023.0);
+	PORTB = 0x00;
+	if (ratio >= 99)
+		PORTB |= 1 << PORTB3;
+	if (ratio >= 75)
+		PORTB |= 1 << PORTB2;
+	if (ratio >= 50)
+		PORTB |= 1 << PORTB1;
+	if (ratio >= 25)
+		PORTB |= 1 << PORTB0;
+}
+
+void set_rgb() {
 	const void (*f[3])(void) = {
 		red,
 		green,
 		blue
 	};
-	ADCSRA |= (1 << ADSC) | (1 << ADIE);
+
 	itoa(ADC, buffer, 10);
 	f[i]();
+}
+
+ISR(ADC_vect) {
+	ADCSRA |= (1 << ADSC) | (1 << ADIE);
+	set_rgb();
+	display_val_lvl();
 }
 
 void ADC_init()
@@ -105,6 +123,7 @@ int main() {
 	timer1_pwm();
 	timer0_pwm();
 	D2_INPUT;
+	B_OUTPUT_FULL;
 	DDRD |= PORT_OUTPUT(D, 6) | PORT_OUTPUT(D, 5) | PORT_OUTPUT(D, 3);
 
 	PORTD = 0xff;

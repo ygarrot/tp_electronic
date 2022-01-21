@@ -48,7 +48,6 @@ int main() {
 
 	PORTD = 0xff;
 	while(1) {
-		int8_t freq = 50;
 		if (!(PIND & (1 << PIND2))) {
 			while (!(PIND & (1 << PIND2)));
 			i = (i + 1) % 3;

@@ -10,7 +10,7 @@
 
 #define B_OUTPUT_(n) (1 << DDB ## n )
 #define B_OUTPUT(n) DDRB |= B_OUTPUT_(n)
-#define B_OUTPUT_FULL DDRB |= B_OUTPUT_(1)| B_OUTPUT_(2) |B_OUTPUT_(3) | B_OUTPUT_(4)
+#define B_OUTPUT_FULL DDRB |= B_OUTPUT_(0)| B_OUTPUT_(1) |B_OUTPUT_(2) | B_OUTPUT_(3)
 /* pint 3 port b en output */
 #define B3_OUTPUT B_OUTPUT(3)
 
@@ -193,7 +193,8 @@ typedef struct s_rgb {
 
 
 #define FREQ (int8_t)50
-#define inverse_ratio(n) (int8_t)(100.0 - (n / 255.0 * 100.0))
+#define calc_percent(n, max) (n / max * 100.0)
+#define inverse_ratio(n) (int8_t)(100.0 - calc_percent(n, 255.0))
 #define calc_ratio(n) (int8_t)FREQ * inverse_ratio(n) / 100;
 
 #define set_red(n) OCR0A = calc_ratio(n);
