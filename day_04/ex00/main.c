@@ -6,12 +6,12 @@
 
 volatile uint8_t power = 0x00;
 
-MY_ISR(INT1_vect) {
+MY_ISR(INT0_vect) {
 	if (millis <= 200)
 		return;
 	millis = 0;
 
-	power = (power + 1) % 18;
+	power = (power + 1) % 16;
 	eeprom_write_byte(ADDR, power);
 	PORTB = power;
 }
@@ -22,10 +22,10 @@ int main() {
 
 	enable_tick_counter();
 	GLOBAL_INTERRUPT;
-	EICRA = 1 << ISC11;
 
-	PORTB = 0;
-	EIMSK = 1 << INT1;
+	EICRA = 1 << ISC01;
+	EIMSK = 1 << INT0;
+
 	power = eeprom_read_byte(ADDR);
 	PORTB = power;
 	while(1);

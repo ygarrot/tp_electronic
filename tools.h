@@ -1,6 +1,5 @@
 #ifndef __TOOLS_H__
 #define __TOOLS_H__
-#include <util/delay.h>
 #include <avr/io.h>
 
 /* https://github.com/amirbawab/AVR-cheat-sheet */
@@ -10,7 +9,7 @@
 
 #define B_OUTPUT_(n) (1 << DDB ## n )
 #define B_OUTPUT(n) DDRB |= B_OUTPUT_(n)
-#define B_OUTPUT_FULL DDRB |= B_OUTPUT_(0)| B_OUTPUT_(1) |B_OUTPUT_(2) | B_OUTPUT_(4)
+#define B_OUTPUT_FULL DDRB |= B_OUTPUT_(0)| B_OUTPUT_(1) |B_OUTPUT_(2) | B_OUTPUT_(3)
 /* pint 3 port b en output */
 #define B3_OUTPUT B_OUTPUT(3)
 
