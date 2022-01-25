@@ -206,5 +206,17 @@ typedef struct s_rgb {
 
 
 /* ########################## END DAY 5 ########################## */
+void ADC_init(int8_t pin)
+{
+	ADMUX = (1 << REFS0) | (pin & 0x07);
 
+	ADCSRA = (1 << ADEN); //enable ADE
+	ADCSRA |= (1 << ADIE); //interrupt
+	ADCSRA |= (1 << ADIF);
+	ADCSRA |= (1 << ADSC); //A2D CONVERTION
+
+	ADCSRA |= (1 << ADPS2); //prescalers
+	ADCSRA |= (1 << ADPS1); //prescalers
+	ADCSRA |= (1 << ADPS0); //prescalers
+}
 #endif

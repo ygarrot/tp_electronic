@@ -7,9 +7,9 @@
 volatile uint8_t power = 0x00;
 
 MY_ISR(INT0_vect) {
-	if (millis <= 200)
+	if (ms_counter <= 200)
 		return;
-	millis = 0;
+	ms_counter = 0;
 
 	power = (power + 1) % 16;
 	eeprom_write_byte(ADDR, power);

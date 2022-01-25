@@ -1,12 +1,12 @@
 #ifndef __TIME_H__
 #define __TIME_H__
-
 #include <avr/interrupt.h>
-uint64_t millis;
+
+uint64_t ms_counter;
 
 void delay_ms(uint64_t ms) {
-	uint64_t start_millis = millis;
-	while (millis - start_millis <= ms);
+	uint64_t start_ms_counter = ms_counter;
+	while (ms_counter - start_ms_counter <= ms);
 }
 
 void enable_tick_counter() {
@@ -16,13 +16,10 @@ void enable_tick_counter() {
 	OCR0A = 250; // 1kHz 1ms
 	TCNT0 = 0;
 
-	millis = 0;
+	ms_counter = 0;
 }
 
 ISR(TIMER0_COMPA_vect) {
-	millis++;
-	PORTB = 0xff;
+	ms_counter++;
 }
-
-
 #endif
