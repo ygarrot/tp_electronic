@@ -1,0 +1,3 @@
+(fp_lib_table
+  (lib (name "cao_empreintes")(type "KiCad")(uri "${KIPRJMOD}/cao_empreintes.pretty")(options "")(descr ""))
+)

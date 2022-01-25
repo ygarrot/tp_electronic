@@ -322,8 +322,32 @@
       ""
     ],
     [
-      "f185683c-35a1-40be-9c6d-2e47977af720",
-      "Untitled Sheet"
+      "114173d4-7413-449e-a4bf-f5b2e91f1f4e",
+      "led_0"
+    ],
+    [
+      "fb8b7f54-ef41-45c6-aca5-df3e1879cbb6",
+      "led_1"
+    ],
+    [
+      "bcb9bda1-c768-498b-b0bc-6aefd1bf629e",
+      "led_2"
+    ],
+    [
+      "68a7dc5d-dad3-4636-aa2f-0cd0280280d0",
+      "led_3"
+    ],
+    [
+      "bf3a598e-cf9c-4e12-a82f-ebf71314a881",
+      "usb flasher"
+    ],
+    [
+      "e130f7f9-aa1b-4509-9ecf-2b94da9306d7",
+      "button_reset"
+    ],
+    [
+      "9b7984db-09c5-43b9-ada9-02d6eeece4c7",
+      "button_but0"
     ]
   ],
   "text_variables": {}
