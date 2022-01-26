@@ -1,3 +1,4 @@
 (fp_lib_table
-  (lib (name "cao_empreintes")(type "KiCad")(uri "${KIPRJMOD}/cao_empreintes.pretty")(options "")(descr ""))
+  (lib (name "cao_empreintes")(type "KiCad")(uri "/home/event/git/tp_electronic/day_07/ex00/ex00/cao_empreintes.pretty")(options "")(descr ""))
+  (lib (name "cao_empreintes_cheat")(type "KiCad")(uri "/home/event/git/tp_electronic/day_07/ex00/ex00/cao_empreintes_cheat.pretty")(options "")(descr ""))
 )
