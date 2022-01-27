@@ -2,7 +2,7 @@
 
 int main()
 {
-	B3_OUTPUT;
-	SET_PORT_B3;
+	B_OUTPUT_FULL;
+	PORTB=0xff;
 	return 0;
 }
